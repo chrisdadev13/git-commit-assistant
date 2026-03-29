@@ -19,13 +19,17 @@ const (
 )
 
 func Confirm(stderr io.Writer, stdin *os.File) (Choice, error) {
+	return ConfirmWithPrompt(stderr, stdin, "Commit? (y/n/e): ")
+}
+
+func ConfirmWithPrompt(stderr io.Writer, stdin *os.File, prompt string) (Choice, error) {
 	if !term.IsTerminal(int(stdin.Fd())) {
 		return Reject, nil
 	}
 
 	scanner := bufio.NewScanner(stdin)
 	for {
-		fmt.Fprint(stderr, "Commit? (y/n/e): ")
+		fmt.Fprint(stderr, prompt)
 		if !scanner.Scan() {
 			return Reject, scanner.Err()
 		}
