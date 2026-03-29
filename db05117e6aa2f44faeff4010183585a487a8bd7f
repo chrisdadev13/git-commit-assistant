@@ -1,0 +1,27 @@
+internal/cli/root.go
+  48aa94a961dc6355 69,84,185,197-198,200-201
+internal/cli/output.go
+  48aa94a961dc6355 8,75-89
+internal/cli/split.go
+  48aa94a961dc6355 1-272
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.22",
+  "base_commit_sha": "db05117e6aa2f44faeff4010183585a487a8bd7f",
+  "prompts": {
+    "48aa94a961dc6355": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6a4ddead-76b6-4bf9-b80b-e5aa42babfa8",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Chris <92900301+chrisdadev13@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 336,
+      "overriden_lines": 0
+    }
+  }
+}
