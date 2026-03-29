@@ -1,0 +1,112 @@
+        GCA — Git Commit Assistant
+        ==========================
+
+GCA is a command-line tool that generates high-quality commit messages
+from your staged changes using fast AI inference. You stage your files,
+run gca, and get a well-written conventional commit in seconds.
+
+It is built for speed. Inference is powered by Cerebras and Groq.
+
+
+Quick Start
+-----------
+
+  1. Install Go 1.25+ and build:
+
+        $ go build -o gca .
+        $ mv gca /usr/local/bin/   # or anywhere in your PATH
+
+  2. Configure your provider and API key:
+
+        $ gca config set provider groq
+        $ gca config set api-key <your-key>
+
+     Get a free API key at:
+       * Groq:     https://console.groq.com
+       * Cerebras: https://cloud.cerebras.ai
+
+  3. Stage some changes and run it:
+
+        $ git add -p
+        $ gca
+
+
+How It Works
+------------
+
+  GCA reads your staged diff, sends it to the configured AI provider,
+  and returns a commit message in Conventional Commits format:
+
+        $ gca
+
+        ----------------------------------
+        feat(auth): add email validation
+
+        - Add regex check for email format on login form
+        - Return user-friendly error for invalid addresses
+        - Add unit tests for edge cases
+        ----------------------------------
+        Commit? (y/n/e):
+
+  * y — accept the message and commit
+  * n — abort, nothing happens
+  * e — edit the message in $EDITOR before committing
+
+
+Flags
+-----
+
+        gca                    Interactive mode (default)
+        gca -n, --dry-run      Preview the message, don't commit
+        gca --no-input         Commit automatically, no prompt (CI)
+        gca --json             Output the message as JSON
+        gca -p, --provider     Override provider (groq, cerebras)
+        gca -m, --model        Override the AI model
+
+
+Configuration
+-------------
+
+  All config lives in ~/.config/gca/config.json. Manage it with:
+
+        gca config set <key> <value>
+        gca config get <key>
+        gca config list
+        gca config path
+
+  Valid keys: provider, api-key, model.
+
+  Environment variables override the config file:
+
+        GCA_PROVIDER       Provider name (groq, cerebras)
+        GROQ_API_KEY       API key for Groq
+        CEREBRAS_API_KEY   API key for Cerebras
+
+  Precedence: CLI flags > environment variables > config file.
+
+
+Providers
+---------
+
+  GCA supports two providers, chosen for inference speed:
+
+        Provider    Default Model                          Endpoint
+        --------    -------------                          --------
+        groq        llama-3.3-70b-versatile                api.groq.com
+        cerebras    qwen-3-235b-a22b-instruct-2507         api.cerebras.ai
+
+  Both expose OpenAI-compatible APIs. A single client handles both.
+
+
+Building from Source
+--------------------
+
+        $ git clone https://github.com/chrisdadev13/git-commit-assistant.git
+        $ cd git-commit-assistant
+        $ go build -o gca .
+
+
+License
+-------
+
+  See the LICENSE file for details.
