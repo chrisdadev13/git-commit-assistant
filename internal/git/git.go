@@ -57,6 +57,42 @@ func StagedDiff() (string, error) {
 	return string(out), nil
 }
 
+func StagedFiles() ([]string, error) {
+	cmd := exec.Command("git", "diff", "--cached", "--name-only")
+	out, err := cmd.Output()
+	if err != nil {
+		stderr := ""
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			stderr = string(exitErr.Stderr)
+		}
+		return nil, &GitError{Op: "diff --name-only", Stderr: stderr, Err: err}
+	}
+	text := strings.TrimSpace(string(out))
+	if text == "" {
+		return nil, nil
+	}
+	return strings.Split(text, "\n"), nil
+}
+
+func ResetStaged() error {
+	cmd := exec.Command("git", "reset", "HEAD")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return &GitError{Op: "reset", Stderr: string(out), Err: err}
+	}
+	return nil
+}
+
+func StageFiles(files []string) error {
+	args := append([]string{"add", "--"}, files...)
+	cmd := exec.Command("git", args...)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return &GitError{Op: "add", Stderr: string(out), Err: err}
+	}
+	return nil
+}
+
 func Commit(message string) (string, error) {
 	cmd := exec.Command("git", "commit", "-m", message)
 	out, err := cmd.CombinedOutput()
