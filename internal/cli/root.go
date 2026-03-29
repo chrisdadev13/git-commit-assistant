@@ -66,6 +66,7 @@ func NewRootCommand() *cobra.Command {
 	cmd.Flags().StringVarP(&f.model, "model", "m", "", "Override AI model")
 
 	cmd.AddCommand(newConfigCmd())
+	cmd.AddCommand(newSplitCmd())
 
 	return cmd
 }
@@ -80,7 +81,7 @@ func run(ctx context.Context, f *flags) error {
 	}
 
 	// Resolve config: flags > env > config file
-	cfg, err := resolveConfig(f)
+	cfg, err := resolveConfig(f.provider, f.model)
 	if err != nil {
 		return &ExitError{Err: err, Code: 1}
 	}
@@ -181,7 +182,7 @@ func doCommit(out *Formatter, message string) error {
 	return nil
 }
 
-func resolveConfig(f *flags) (*config.Config, error) {
+func resolveConfig(providerFlag, modelFlag string) (*config.Config, error) {
 	cfg, err := config.Load()
 	if err != nil {
 		return nil, err
@@ -193,11 +194,11 @@ func resolveConfig(f *flags) (*config.Config, error) {
 	}
 
 	// Flag overrides
-	if f.provider != "" {
-		cfg.Provider = f.provider
+	if providerFlag != "" {
+		cfg.Provider = providerFlag
 	}
-	if f.model != "" {
-		cfg.Model = f.model
+	if modelFlag != "" {
+		cfg.Model = modelFlag
 	}
 
 	// Validate provider

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"golang.org/x/term"
 )
@@ -70,4 +71,19 @@ func (f *Formatter) JSON(message string) error {
 
 func (f *Formatter) Plain(message string) {
 	fmt.Fprintln(f.Stdout, message)
+}
+
+func (f *Formatter) CommitGroupHeader(index, total int, title, body string, files []string) {
+	sep := "----------------------------------"
+	fmt.Fprintf(f.Stderr, "\n  %s %d/%d\n", f.style(colorDim, "Commit"), index, total)
+	fmt.Fprintln(f.Stderr, f.style(colorDim, sep))
+	fmt.Fprintln(f.Stderr, f.style(colorBold, "  "+title))
+	if body != "" {
+		fmt.Fprintln(f.Stderr)
+		for _, line := range strings.Split(body, "\n") {
+			fmt.Fprintln(f.Stderr, "  "+line)
+		}
+	}
+	fmt.Fprintf(f.Stderr, "\n  %s %s\n", f.style(colorDim, "Files:"), strings.Join(files, ", "))
+	fmt.Fprintln(f.Stderr, f.style(colorDim, sep))
 }
