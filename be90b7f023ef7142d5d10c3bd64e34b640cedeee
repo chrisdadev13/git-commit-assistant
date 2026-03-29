@@ -1,0 +1,25 @@
+internal/ai/prompt.go
+  48aa94a961dc6355 3-4,19-39,52-56
+internal/ai/provider.go
+  48aa94a961dc6355 5,12-17,20,92-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.22",
+  "base_commit_sha": "be90b7f023ef7142d5d10c3bd64e34b640cedeee",
+  "prompts": {
+    "48aa94a961dc6355": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6a4ddead-76b6-4bf9-b80b-e5aa42babfa8",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Chris <92900301+chrisdadev13@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 424,
+      "total_deletions": 7,
+      "accepted_lines": 424,
+      "overriden_lines": 0
+    }
+  }
+}
