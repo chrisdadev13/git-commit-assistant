@@ -1,5 +1,5 @@
-        GCA — Git Commit Assistant
-        ==========================
+GCA — Git Commit Assistant
+==========================
 
 GCA is a command-line tool that generates high-quality commit messages
 from your staged changes using fast AI inference. You stage your files,
