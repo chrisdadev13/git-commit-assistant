@@ -1,0 +1,41 @@
+internal/cli/output.go
+  a673ecd6ccff52b1 1-73
+internal/config/config.go
+  a673ecd6ccff52b1 1-104
+internal/editor/editor.go
+  a673ecd6ccff52b1 1-51
+internal/cli/root.go
+  a673ecd6ccff52b1 1-228
+internal/ai/provider.go
+  a673ecd6ccff52b1 1-83
+internal/cli/config.go
+  a673ecd6ccff52b1 1-136
+internal/prompt/confirm.go
+  a673ecd6ccff52b1 1-44
+main.go
+  a673ecd6ccff52b1 1-21
+internal/ai/prompt.go
+  a673ecd6ccff52b1 1-28
+internal/git/git.go
+  a673ecd6ccff52b1 1-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.20",
+  "base_commit_sha": "82202a7f3b3f55752726653ae4b642eb6ec7bd6c",
+  "prompts": {
+    "a673ecd6ccff52b1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a74178c4-3a81-4db3-ac7a-abd719c9e3ba",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Chris <92900301+chrisdadev13@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 843,
+      "total_deletions": 1,
+      "accepted_lines": 842,
+      "overriden_lines": 0
+    }
+  }
+}
